@@ -40,7 +40,7 @@ public class DTapClient implements ClientModInitializer {
         // Explosions-Check: immer aktiv
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hit) -> {
             if (!world.isClient() || !(entity instanceof EndCrystalEntity)) return ActionResult.PASS;
-            float dmg = DamageCalculator.crystalDamage(player, entity.getPos(), world);
+            float dmg = DamageCalculator.crystalDamage(player, new Vec3d(entity.getX(), entity.getY(), entity.getZ()), world);
             boolean lethal = dmg >= player.getHealth() + player.getAbsorptionAmount();
             return (lethal && !hasTotem(player)) ? ActionResult.FAIL : ActionResult.PASS;
         });
